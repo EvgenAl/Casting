@@ -3,7 +3,7 @@
 body{
 	margin:0;
 	min-width: 320px;
-	font-family: Lato;
+	font-family: Lato, sans-serif;
 }
 
 section{
@@ -39,6 +39,12 @@ h2{
 	font-size: 55px;
 	font-weight: 400;
 	text-transform: uppercase;
+	@media(max-width:767px){
+		font-size: 45px;
+	}
+	@media(max-width:650px){
+		font-size: 30px;
+	}
 }
 
 p{
@@ -47,7 +53,7 @@ p{
 
 a{
 	text-decoration: none;
-	 position: relative;
+	position: relative;
 	&:hover{
 		text-decoration: none;
 	}
@@ -81,7 +87,8 @@ a{
 button, 
 button:active, 
 button:focus,
-input:focus {
+input:focus,
+textarea:focus {
 	outline: none;
 }
 
@@ -94,13 +101,133 @@ input:focus {
 	}
 }
 
+
+/*==================social========================*/
+
+
+.social{
+	margin: 30px 0;
+	@media(max-width:650px){
+		padding: 15px 0;
+	}
+	a{
+		width: 30px;
+		height: 30px;
+		border-radius:30px;
+		border: 2px solid white;
+		display: inline-block;
+		margin-right: 24px;
+		position: relative;
+		&:last-child{
+			margin-right: 0;
+		}
+		.fa{
+			color:#fff;
+			font-size: 14px;
+			height: 14px;
+			width: 14px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-top: -7px;
+			margin-left: -7px;
+		}
+		&:first-child{
+			.fa{
+				margin-left: -4px;
+			}
+		}
+	}
+
+}
+
+
+/*================menu toggle====================*/
+
+.menu_toggle{
+	display: none;
+	@media(max-width:991px){
+		display:block;
+		padding-top: 20px;
+	}
+	@media(max-width:767px){
+		padding-top: 22px;
+	}
+}
+
+.menu {
+	position: relative;
+	display: block;
+	width: 40px;
+	height: 32px;
+	padding: 0;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	@media(max-width:767px){
+		width: 30px;
+		height: 22px;
+	}
+	&__line {
+		position: absolute;
+		left: 0;
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #fff;
+	}
+
+	&__line--1 {
+		top: 0;
+		transition: all .4s;
+	}
+
+	&__line--2 {
+		top: 50%;
+		margin-top: -1px;
+		transition: all .4s;
+	}
+
+	&__line--3 {
+		bottom: 0;
+		transition: all .4s;
+	}
+}
+
+.menu--active {
+
+	& .menu__line {
+		background-color: tomato;
+		transition: all .4s;
+	}
+
+	& .menu__line--1 {
+		top: 50%;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+	& .menu__line--2 {
+		opacity: 0;
+	}
+
+	& .menu__line--3 {
+		top: 50%;
+		-webkit-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+}
+
 /*===============button effect===================*/
 
 
 .btn-5 {
 	border: 0 solid;
 	box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-	outline: 1px solid;
+	outline: 0;
 	outline-color: rgba(255, 255, 255, .5);
 	outline-offset: 0px;
 	text-shadow: none;
@@ -114,6 +241,8 @@ input:focus {
 	outline-offset: 15px;
 	text-shadow: 1px 1px 2px #427388; 
 }
+
+
 
 /*======================loader=============================*/
 
@@ -538,25 +667,90 @@ input:focus {
 
 a.effect-underline:after {
 	content: '';
-  position: absolute;
-  left: 0;
-  display: inline-block;
-  height: 1em;
-  width: 100%;
-  border-bottom: 1px solid;
-  margin-top: 10px;
-  opacity: 0;
+	position: absolute;
+	left: 0;
+	display: inline-block;
+	height: 1em;
+	width: 100%;
+	border-bottom: 1px solid;
+	margin-top: 10px;
+	opacity: 0;
 	transition:opacity 0.35s, -webkit-transform 0.35s;
 	transition:opacity 0.35s, transform 0.35s;
 	transition: opacity 0.35s, transform 0.35s, -webkit-transform 0.35s;
 	-webkit-transform: scale(0,1);
 	-ms-transform: scale(0,1);
-	    transform: scale(0,1);
+	transform: scale(0,1);
 }
 
 a.effect-underline:hover:after {
-  opacity: 1;
+	opacity: 1;
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
-	    transform: scale(1);
+	transform: scale(1);
+}
+
+
+
+
+/*===========================slider buttons===========================*/
+
+
+
+@mixin transition($in) {
+	transition:$in;
+	-webkit-transition:$in;
+	-moz-transition:$in;
+	-o-transition:$in;
+	-ms-transition:$in;
+}
+@mixin transform($in) {
+	transform:$in;
+	-webkit-transform:$in;
+	-moz-transform:$in;
+	-o-transform:$in;
+	-ms-transform:$in;
+}
+@mixin animation($in) {
+	animation:$in;
+	-webkit-animation:$in;
+	-moz-animation:$in;
+	-o-animation:$in;
+	-ms-animation:$in;
+}
+
+
+
+.myButt {
+	background-color:transparent;
+	position:relative;
+	@include transition(all 0.5s ease);
+}
+
+
+.one {
+	border-color:#fff;
+	overflow:hidden;
+	color:#fff;
+
+	.insider {
+		background-color:#fff;
+		width:100%;
+		height:20px;
+		position:absolute;
+		left:-135px;
+
+		@include transform(rotateZ(45deg));
+	}
+
+	&:hover {
+		background-color:$red;
+		border-color:#fff;
+		color:#fff;
+
+		.insider {
+			@include transition(all 0.3s ease);
+			left:135px;
+		}
+	}
 }
